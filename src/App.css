@@ -1,38 +1,83 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Home {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: flex-end; /* Align items to the right */
+  align-items: center; /* Vertically center the card */
+  height: 100vh;
+  padding: 20px;
+  background-size: cover;
+  background-position: 100% 50%;
 }
 
-.App-link {
-  color: #61dafb;
+.bg-image {
+  background-image: url('./school-building.jpeg'); 
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: cover;
+  background-position: 100% 50%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.admwork-img {
+  max-width: 400px; 
+  height: 250px; 
+}
+
+.heading {
+  text-decoration: underline; 
+  font-weight: bold; 
+  color: rebeccapurple;
+  font-size: 40px;
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: rgb(107, 223, 240);
+  border-radius: 10px;
+}
+
+p {
+  font-size: 1.2rem;
+  color: royalblue;
+}
+
+.mt-2 {
+  margin-top: 20px;
+}
+
+.button-link {
+  font-size: 30px;
+}
+
+.card {
+  background-color: whitesmoke;
+  padding: 20px;
+  border-radius: 10px;
+  width: fit-content;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.students-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.student-card {
+  flex: 1 1 calc(50% - 20px); /* Adjust the width to take up 50% of the row minus the gap */
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #68b9b3;
+}
+
+.insert-card {
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: lightpink; /* Blue background */
+  color: white; /* White text color */
+  margin: 10px;
+  width: 50%;
 }
