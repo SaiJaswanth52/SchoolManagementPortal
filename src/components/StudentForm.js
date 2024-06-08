@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../App.css";
+import { ValidateForm } from "../ValidateForm";
 
 const StudentForm = () => {
   const initialState = {
@@ -11,6 +12,7 @@ const StudentForm = () => {
   };
 
   const [studentData, setStudentData] = useState(initialState);
+  const [errors, setErrors] = useState({});
   const [error, setError] = useState("");
 
   const handleInputChange = (e) => {
@@ -50,6 +52,13 @@ const StudentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate form data
+    const validationErrors = ValidateForm(studentData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
     // Check if student ID already exists
     const existingStudent = await checkStudentId(studentData.studentid);
     if (existingStudent) {
@@ -68,6 +77,7 @@ const StudentForm = () => {
         console.log("Student data submitted successfully:", response.data);
         window.alert("Student Data Submitted Successfully");
         setStudentData(initialState); // Reset the form to initial state
+        setErrors({}); // Clear errors after successful submission
       })
       .catch((error) => {
         console.error("There was an error submitting the student data!", error);
@@ -85,6 +95,9 @@ const StudentForm = () => {
           value={studentData.studentid}
           onChange={handleInputChange}
         />
+        {errors.studentid && (
+          <span className="text-danger">{errors.studentid}</span>
+        )}
       </div>
       <div>
         <label>First Name:</label>
@@ -94,6 +107,9 @@ const StudentForm = () => {
           value={studentData.firstname}
           onChange={handleInputChange}
         />
+        {errors.firstname && (
+          <span className="text-danger">{errors.firstname}</span>
+        )}
       </div>
       <div>
         <label>Last Name:</label>
@@ -103,6 +119,9 @@ const StudentForm = () => {
           value={studentData.lastname}
           onChange={handleInputChange}
         />
+        {errors.lastname && (
+          <span className="text-danger">{errors.lastname}</span>
+        )}
       </div>
       <div>
         <label>Subjects Registered:</label>

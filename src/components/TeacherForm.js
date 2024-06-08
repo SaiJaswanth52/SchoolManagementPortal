@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../App.css";
+import { validateTeacherForm } from "../TeachersValidation"; // Import the validation function
 
 const TeacherForm = () => {
   const initialState = {
@@ -11,6 +12,7 @@ const TeacherForm = () => {
   };
 
   const [teacherData, setTeacherData] = useState(initialState);
+  const [errors, setErrors] = useState({});
   const [error, setError] = useState("");
 
   const handleInputChange = (e) => {
@@ -20,6 +22,13 @@ const TeacherForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate form data
+    const validationErrors = validateTeacherForm(teacherData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
 
     // Check if teacherId already exists
     try {
@@ -46,6 +55,7 @@ const TeacherForm = () => {
       .then((response) => {
         window.alert("Teacher Data Submitted Successfully");
         setTeacherData(initialState); // Reset the form to initial state
+        setErrors({}); // Clear errors after successful submission
       })
       .catch((error) => {
         console.error("There was an error submitting the teacher data!", error);
@@ -63,6 +73,9 @@ const TeacherForm = () => {
           value={teacherData.teacherId}
           onChange={handleInputChange}
         />
+        {errors.teacherId && (
+          <span className="text-danger">{errors.teacherId}</span>
+        )}
       </div>
       <div>
         <label>First Name:</label>
@@ -72,6 +85,9 @@ const TeacherForm = () => {
           value={teacherData.firstName}
           onChange={handleInputChange}
         />
+        {errors.firstName && (
+          <span className="text-danger">{errors.firstName}</span>
+        )}
       </div>
       <div>
         <label>Last Name:</label>
@@ -81,6 +97,9 @@ const TeacherForm = () => {
           value={teacherData.lastName}
           onChange={handleInputChange}
         />
+        {errors.lastName && (
+          <span className="text-danger">{errors.lastName}</span>
+        )}
       </div>
       <div>
         <label>Teaches:</label>
@@ -90,6 +109,9 @@ const TeacherForm = () => {
           value={teacherData.teaches}
           onChange={handleInputChange}
         />
+        {errors.teaches && (
+          <span className="text-danger">{errors.teaches}</span>
+        )}
       </div>
       <button type="submit">Submit</button>
     </form>

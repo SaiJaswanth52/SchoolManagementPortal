@@ -7,7 +7,6 @@ import {
   CardBody,
   CardImg,
   CardText,
-  Button,
 } from "react-bootstrap";
 import "../App";
 import { Link } from "react-router-dom";
