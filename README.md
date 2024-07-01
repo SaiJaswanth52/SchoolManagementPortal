@@ -52,7 +52,8 @@ POST /Teachers: Create a new teacher
 GET /Student/{studentId}: Get student by ID
 GET /Teachers/{teacherId}: Get teacher by ID
 GET /Admin: Fetch all admin users for login verification
-Frontend Details
+
+### Frontend Details
 React Application
 Main Component: App.js
 Components: Home, AdminLogin, AdminDashboard, StudentsSection, TeachersSection, InsertData
